@@ -1,0 +1,9 @@
+HOW TO RUN the APP ?
+------------------
+open terminal 1
+>.\myenv\Scripts\activate
+>flask run
+------------------
+open terminal 2
+>npm start 
+------------------
