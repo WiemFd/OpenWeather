@@ -7,6 +7,25 @@ import requests #The requests module allows you to send HTTP requests using Pyth
 import colorama  #The Colorama is one of the built-in Python modules to display the text in different colors.
 from colorama import Fore, Style
 colorama.init(autoreset=True) 
+import pymongo
+#import app as config
+#from app import get_weather
+import requests
+import threading
+import os
+import time
+from datetime import datetime
+import shutil
+import json
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import httplib2
+import folium
+import pandas as pd
+import seaborn as sns
+from geopy.geocoders import Nominatim
+geolocator = Nominatim(user_agent="Weather Forecast App")
 
 def Kelvin_To_Celsius_Fathrenheit(kelvin): #function to convert temperature from kelvin to celsius and fathrenheit
     celsius = kelvin - 273.15
@@ -81,6 +100,89 @@ def get_weather(): #function to extract weather data from flask backend API
             print(Fore.LIGHTMAGENTA_EX+Style.BRIGHT+"Real Time & Date : "+Fore.WHITE+f"{real_time} {real_date}\n")
             print(Fore.LIGHTMAGENTA_EX+Style.BRIGHT+"Sunrise Time : "+Fore.WHITE+f"{sunrise_time}\n")
             print(Fore.LIGHTMAGENTA_EX+Style.BRIGHT+"Sunset Time : "+Fore.WHITE+f"{sunset_time}\n")
+
+            locations = [city2]
+        
+            
+
+            open_weather_map_API_key = "8d4e8f807af8f877a9b46931b17a21cc"
+            open_weather_API_endpoint = "http://api.openweathermap.org/" 
+
+            # Initialized HTTPlib for HTTP requests
+            http_initializer = httplib2.Http()
+
+            freezing_temperature_threshold = 2 # 2 Fahrenheit
+
+            city_names = locations
+
+            
+
+            def thread_for_5_days_3_hour_forecast():
+
+                # Initialize MongoDB client running on localhost
+                client = pymongo.MongoClient('mongodb://localhost:27017/')
+
+                # Dictionary to store the alerts for rain, snow and freezing temperature
+                alerts = {"rain":[],"snow":[],"freezing_temperature":[]}
+
+                for city in city_names:
+                    url = open_weather_API_endpoint+"/data/2.5/forecast?q="+city+"&appid="+open_weather_map_API_key
+                    http_initializer = httplib2.Http()
+                    response, content = http_initializer.request(url,'GET')
+                    utf_decoded_content = content.decode('utf-8')
+                    json_object = json.loads(utf_decoded_content)
+
+                    # Creating Mongodb database
+                    db = client.weather_data
+
+                    # Putting Openweathermap API data in database, with timestamp as primary key
+                    for element in json_object["list"]:
+                        try:
+                            datetime = element['dt']
+                            del element['dt']
+                            db['{}'.format(city)].insert_one({'_id':datetime,"data":element})
+                        except pymongo.errors.DuplicateKeyError:
+                            continue
+                    # Here we store the alerts based on conditions
+                    for a in db['{}'.format(city)].find({}):
+                        # Converting temperature to Fahrenheit
+                        temperature = (float(a["data"]["main"]["temp"]) - 273.15)*(9/5)+32 
+                        if temperature<freezing_temperature_threshold:
+                            alerts["freezing_temperature"].append("Freezing temperature "+ temperature +" in "+city+" on "+str(a["data"]["dt_txt"]).split(" ")[0]+" at "+str(a["data"]["dt_txt"]).split(" ")[1])
+                        elif a["data"]["weather"][0]["main"]=="Rain":
+                            alerts["rain"].append("Rain expected in "+city+" on "+str(a["data"]["dt_txt"]).split(" ")[0]+" at "+str(a["data"]["dt_txt"]).split(" ")[1])
+                        elif a["data"]["weather"][0]["main"]=="Snow":
+                            alerts["snow"].append("Snow expected in "+city+" on "+str(a["data"]["dt_txt"]).split(" ")[0]+" at "+str(a["data"]["dt_txt"]).split(" ")[1])
+                            
+                print("*********WEATHER ALERTS********")
+                if len(alerts["freezing_temperature"])>0:
+                    for i in alerts["freezing_temperature"]:
+                        print(i)
+                        
+                if len(alerts["rain"])>0:
+                    for i in alerts["rain"]:
+                        print(i)
+                        
+                if len(alerts["snow"])>0:
+                    for i in alerts["snow"]:
+                        print(i)
+            locations = {}
+    
+            # Get latitude and longitude of cities for which we want to forecast weather
+            for city0 in city_names:
+                locations[city0] = geolocator.geocode(city0)
+                
+            
+            t1 = threading.Thread(target = lambda : thread_for_5_days_3_hour_forecast(), name='t1')
+            t1.setDaemon=True
+                
+            t1.start()
+            t1.join()
+
+            
+            print("hello"+city2+"\n")
+    
+
 
     else: #if the city is not available in openweathermap API
             print(Fore.GREEN+Style.BRIGHT+"City Not Found\n")
