@@ -24,8 +24,6 @@ import httplib2
 import folium
 import pandas as pd
 import seaborn as sns
-from geopy.geocoders import Nominatim
-geolocator = Nominatim(user_agent="Weather Forecast App")
 
 def Kelvin_To_Celsius_Fathrenheit(kelvin): #function to convert temperature from kelvin to celsius and fathrenheit
     celsius = kelvin - 273.15
@@ -153,34 +151,17 @@ def get_weather(): #function to extract weather data from flask backend API
                             alerts["rain"].append("Rain expected in "+city+" on "+str(a["data"]["dt_txt"]).split(" ")[0]+" at "+str(a["data"]["dt_txt"]).split(" ")[1])
                         elif a["data"]["weather"][0]["main"]=="Snow":
                             alerts["snow"].append("Snow expected in "+city+" on "+str(a["data"]["dt_txt"]).split(" ")[0]+" at "+str(a["data"]["dt_txt"]).split(" ")[1])
-                            
+                all_alerts=[]   
                 print("*********WEATHER ALERTS********")
-                if len(alerts["freezing_temperature"])>0:
-                    for i in alerts["freezing_temperature"]:
-                        print(i)
-                        
-                if len(alerts["rain"])>0:
-                    for i in alerts["rain"]:
-                        print(i)
-                        
-                if len(alerts["snow"])>0:
-                    for i in alerts["snow"]:
-                        print(i)
-            locations = {}
-    
-            # Get latitude and longitude of cities for which we want to forecast weather
-            for city0 in city_names:
-                locations[city0] = geolocator.geocode(city0)
-                
+                for alert_type, alert_msg in alerts.items():
+                    if len(alerts[alert_type])>0:
+                        print(alert_type.upper()+ ":")
+                        for msg in alert_msg:
+                            print(" - "+ msg)
+                            all_alerts.append(msg)
+                return(all_alerts)
             
-            t1 = threading.Thread(target = lambda : thread_for_5_days_3_hour_forecast(), name='t1')
-            t1.setDaemon=True
-                
-            t1.start()
-            t1.join()
-
-            
-            print("hello"+city2+"\n")
+            alerts=thread_for_5_days_3_hour_forecast()
     
 
 
@@ -203,6 +184,7 @@ def get_weather(): #function to extract weather data from flask backend API
             real_time=" "
             sunrise_time=" "
             sunset_time=" "
+            alerts=[]
         
             
     return jsonify({'cod':city_cod,
@@ -220,7 +202,8 @@ def get_weather(): #function to extract weather data from flask backend API
                     'time':real_time,
                     'date': real_date,
                     'sunrise':sunrise_time,
-                    'sunset':sunset_time})
+                    'sunset':sunset_time,
+                    'alerts':alerts})
 
 if __name__ == '__main__':
     app.run()
