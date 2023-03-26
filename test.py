@@ -102,7 +102,7 @@ def get_weather(): #function to extract weather data from flask backend API
             print(Fore.LIGHTMAGENTA_EX+Style.BRIGHT+"Sunset Time : "+Fore.WHITE+f"{sunset_time}\n")
 
             locations = [city2]
-            refresh_frequency = 60
+        
             
 
             open_weather_map_API_key = "8d4e8f807af8f877a9b46931b17a21cc"
@@ -115,8 +115,7 @@ def get_weather(): #function to extract weather data from flask backend API
 
             city_names = locations
 
-            # How often do we want our app to refresh and download data
-            refresh_frequency = refresh_frequency
+            
 
             def thread_for_5_days_3_hour_forecast():
 
@@ -173,19 +172,15 @@ def get_weather(): #function to extract weather data from flask backend API
             for city0 in city_names:
                 locations[city0] = geolocator.geocode(city0)
                 
-            while 1:
-                try:
-                    t1 = threading.Thread(target = lambda : thread_for_5_days_3_hour_forecast(), name='t1')
-                    t1.setDaemon=True
+            
+            t1 = threading.Thread(target = lambda : thread_for_5_days_3_hour_forecast(), name='t1')
+            t1.setDaemon=True
                 
-                    t1.start()
-                    t1.join()
-                    
-                    time.sleep(refresh_frequency) 
+            t1.start()
+            t1.join()
 
-                except Exception as e:
-                    print(e)
-        
+            
+            print("hello"+city2+"\n")
     
 
 
