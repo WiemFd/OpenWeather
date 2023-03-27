@@ -35,13 +35,13 @@ def mPERs_To_kmPERh(wind_speed): #function to convert wind speed from m/s to km/
     return wind_speed2
 
 root_url = "http://api.openweathermap.org/data/2.5/weather?"
-api_key = "41a5602c0366af4dd27e1e3cc499b9da" # replace this variable with your openWeather API key
+api_key = "41a5602c0366af4dd27e1e3cc499b9da" # openWeather API key
 
 app = Flask(__name__)
 CORS(app)  # enable Cross-Origin Resource Sharing (CORS)
 
 @app.route('/weather', methods=['GET']) 
-def get_weather(): #function to extract weather data from flask backend API
+def get_weather(): #function to extract weather data from backend
     city = request.args.get('city') 
     final_url = root_url+"appid="+api_key+"&q="+city
     response = requests.get(final_url).json() #the dictionary that contains the weather data 
@@ -159,6 +159,10 @@ def get_weather(): #function to extract weather data from flask backend API
                         for msg in alert_msg:
                             print(" - "+ msg)
                             all_alerts.append(msg)
+                    if len(alerts[alert_type]) == 0:
+                        nomsg=("No alerts found for " + alert_type)
+                        all_alerts.append(nomsg)
+                 
                 return(all_alerts)
             
             alerts=thread_for_5_days_3_hour_forecast()
