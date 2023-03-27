@@ -9,6 +9,7 @@ function Form(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    toast.dismiss();
     const url = `http://localhost:5000/weather?city=${city}`;
     const response = await fetch(url);
     const data = await response.json();
@@ -17,7 +18,7 @@ function Form(props) {
       setError('City not found ! Please enter a valid city name.');
       toast.error('City not found !', {
         position: "top-right",
-        autoClose: 1500,
+        autoClose: false,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -26,9 +27,9 @@ function Form(props) {
         theme: "light",
         });
 
-        toast.info('🦄 Please enter a valid city name. ', {
+        toast.info(' Please enter a valid city name. ', {
             position: "top-right",
-            autoClose: 2000,
+            autoClose: false,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -46,16 +47,30 @@ function Form(props) {
   function notify() {
         if (weatherData && weatherData.alerts) {
             for (let i = 0; i < weatherData.alerts.length; i++) {
+                if (i===0){
+                    toast(weatherData.alerts[i], {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    }); 
+                }
+                else {
+                let delay=(i+1)*3000
                 toast(weatherData.alerts[i], {
                     position: "top-right",
-                    autoClose: 10000,
+                    autoClose: delay,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                });
+                });}
             }
         } 
     }
@@ -64,6 +79,7 @@ function Form(props) {
         setCity('');
         setWeatherData(null);
         setError(null);
+        toast.dismiss(); //to close all toast alerts
     }
   
 
