@@ -74,7 +74,7 @@ body {
   position: absolute; 
   top: 0; bottom: 0; left: 0; right: 0; 
   margin: auto; 
-  width: 80%; 
+  width: 70%; 
   height: 80%; 
   background-color: rgba(241, 246, 248, 0.215);
   padding: 2rem;
@@ -96,9 +96,9 @@ form {
 .form-column {
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 40px;
   padding: 20px ;
-  background-color: aliceblue;
+  background-color: rgba(240, 248, 255, 0.593);
 }
 
 input[type="text"] {
@@ -120,6 +120,11 @@ button {
 
 button[type="button"] {
   background-color: #f44336;
+}
+
+.notif{
+  width: 5rem;
+  background-color: #0eaf11;
 }
 
 h1 {
