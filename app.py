@@ -8,22 +8,8 @@ import colorama  #The Colorama is one of the built-in Python modules to display 
 from colorama import Fore, Style
 colorama.init(autoreset=True) 
 import pymongo
-#import app as config
-#from app import get_weather
-import requests
-import threading
-import os
-import time
-from datetime import datetime
-import shutil
 import json
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 import httplib2
-import folium
-import pandas as pd
-import seaborn as sns
 
 def Kelvin_To_Celsius_Fathrenheit(kelvin): #function to convert temperature from kelvin to celsius and fathrenheit
     celsius = kelvin - 273.15
@@ -59,9 +45,9 @@ def get_weather(): #function to extract weather data from backend
             wind_speed= round(mPERs_To_kmPERh(wind_speed),2)
             weather_status = response['weather'][0]['description']
             icon_id = response['weather'][0]['icon']
-            sunrise_time = date.datetime.fromtimestamp(response['sys']['sunrise'])
+            sunrise_time = date.datetime.utcfromtimestamp(response['sys']['sunrise']+response['timezone'])
             sunrise_time = sunrise_time.strftime("%H:%M")
-            sunset_time = date.datetime.fromtimestamp(response['sys']['sunset'])
+            sunset_time = date.datetime.utcfromtimestamp(response['sys']['sunset']+response['timezone'])
             sunset_time = sunset_time.strftime("%H:%M")
             visibility = response['visibility']/1000
             visibility=round(visibility,1)
