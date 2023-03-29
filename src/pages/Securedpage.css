@@ -1,0 +1,152 @@
+/* dynamique background */
+body {
+  background-image: url("../images/back.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+  
+  @keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+  }
+  
+  .wave {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+  }
+  
+  .wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+  }
+  
+  @keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+  
+    25% {
+        transform: translateX(-25%);
+    }
+  
+    50% {
+        transform: translateX(-50%);
+    }
+  
+    75% {
+        transform: translateX(-25%);
+    }
+  
+    100% {
+        transform: translateX(1);
+    }
+  }
+  .App {
+    text-align: center;
+    font-family: sans-serif;
+    position: absolute; 
+    top: 0; bottom: 0; left: 0; right: 0; 
+    margin: auto; 
+    width: 70%; 
+    height: 80%; 
+    background-color: rgba(241, 246, 248, 0.215);
+    padding: 2rem;
+    border-radius: 5px;
+  }
+  
+  form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .form-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .form-column {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    padding: 20px ;
+    background-color: rgba(240, 248, 255, 0.593);
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border-color: rgba(55, 52, 52, 0.727);
+    margin-right: 10px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #0e64af;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  button[type="button"] {
+    background-color: #f44336;
+  }
+  
+  .notif{
+    width: 5rem;
+    background-color: #0eaf11;
+  }
+  
+  h1 {
+    margin-top: 20px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: #e8eaf0;
+  }
+  
+  h2 {
+    font-size: 32px;
+    margin-top: 0;
+  }
+  
+  p {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  img {
+    display: block; 
+    margin: 0 auto; 
+    width: 50%;
+    height: 50%;
+  }  
