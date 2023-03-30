@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Securedpage.css';
 
+
 function Form(props) {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
@@ -87,7 +88,7 @@ function Form(props) {
   return (
     <div className='body'>
     <div className='App'>
-    <h1>SkyCast</h1>
+    <h1></h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

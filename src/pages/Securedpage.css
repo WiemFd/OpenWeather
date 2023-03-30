@@ -1,8 +1,6 @@
 /* dynamique background */
 body {
-  background-image: url("../images/back.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(315deg, rgba(101,0,94,1) 30%, rgba(60,132,206,1) 70%)
 }
 
   
@@ -70,9 +68,9 @@ body {
     font-family: sans-serif;
     position: absolute; 
     top: 0; bottom: 0; left: 0; right: 0; 
-    margin: auto; 
+    margin: 7rem auto; 
     width: 70%; 
-    height: 80%; 
+    height: 75%; 
     background-color: rgba(241, 246, 248, 0.215);
     padding: 2rem;
     border-radius: 5px;

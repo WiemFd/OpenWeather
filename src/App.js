@@ -17,7 +17,7 @@ function App() {
     >
       <div>
         <Nav />
-        <Header />
+
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<WelcomePage />} />
