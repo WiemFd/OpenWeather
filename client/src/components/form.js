@@ -86,7 +86,6 @@ function Form(props) {
   return (
     <div className='body'>
     <div className='App'>
-    <h1>SkyCast</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -95,7 +94,7 @@ function Form(props) {
           placeholder="Enter city name"
         />
         <button type="submit">Submit<ToastContainer /></button>
-        <button type="button" onClick={handleReset}>Reset</button>
+        <button type="button" onClick={handleReset} className='reset'>Reset</button>
       </form>
       {weatherData && (
         <><form className="form-container">
