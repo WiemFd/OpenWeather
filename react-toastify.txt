@@ -1,3 +1,2 @@
 npm install --save react-toastify
-npm install --global yarn
-yarn add react-toastify
+npm install weather-icons-react --save
