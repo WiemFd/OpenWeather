@@ -18,7 +18,7 @@ function Form(props) {
       setWeatherData(null);
       setError('City not found ! Please enter a valid city name.');
       toast.error('City not found !', {
-        position: "top-right",
+        position: "bottom-center",
         autoClose: false,
         hideProgressBar: false,
         closeOnClick: true,
@@ -29,7 +29,7 @@ function Form(props) {
         });
 
         toast.info(' Please enter a valid city name. ', {
-            position: "top-right",
+            position: "bottom-center",
             autoClose: false,
             hideProgressBar: false,
             closeOnClick: true,
@@ -60,7 +60,7 @@ function Form(props) {
                         theme: "light",
                     }); 
                 }
-                else {
+                if (i!==0) {
                 let delay=(i+1)*3000
                 toast(weatherData.alerts[i], {
                     position: "top-right",
