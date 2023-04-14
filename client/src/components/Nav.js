@@ -33,7 +33,7 @@ const Nav = () => {
     
       return (
         <nav style={navStyles} className="nav">
-          <h2 style={{ color: "white", margin: 0 , fontfamily: "sans-serif"}}>SkyCast</h2>
+          <h1 style={{ color: "white", margin: 0 , fontfamily: "sans-serif"}}>SkyCast</h1>
           <div style={{ display: "flex" }}>
             <a href="/" style={linkStyles}>
               Home

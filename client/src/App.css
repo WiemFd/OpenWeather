@@ -74,10 +74,9 @@ body {
   font-family: sans-serif;
   position: absolute; 
   top: 0; bottom: 0; left: 0; right: 0; 
-  margin: 7rem auto; 
+  margin: 5rem auto; 
   width: 70%; 
-  height: 70%; 
-  background-color: rgba(241, 246, 248, 0.215);
+  height: 50%; 
   padding: 2rem;
   border-radius: 5px;
 }
@@ -90,21 +89,55 @@ background-color: rgba(241, 246, 248, 0.215);
 form {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  
 }
 
 .form-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+  background-color: rgba(241, 246, 248, 0.215);
+  
+  
 }
 
 .form-column {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
-  padding: 20px ;
+  margin: 10px;
+  padding: 15px ;
+}
+.form-column span{
+  font-size: 20px;
+  font-weight: bold; 
+  color: #070335;
+  padding: 5px;
+
+}
+.weather{
   background-color: rgba(240, 248, 255, 0.593);
+}
+.status
+{
+  font-size: 40px;
+}
+
+
+.weather_status{
+  margin: 3px;
+  padding: 2px;
+  font-size: 15px;
+  color: gray;
+}
+.weather_status span{
+  margin: 3px;
+  padding: 2px;
+  font-size: 23px;
+  color: rgb(15, 5, 75);
+  font-weight: bold;
+  display: block;
+  
 }
 
 input[type="text"] {
@@ -131,26 +164,32 @@ button {
 .notif{
   width: 5rem;
   background-color: #0eaf11;
+  margin-bottom: 20px;
 }
 
 h1 {
   margin-top: 20px;
   text-align: left;
   font-family: Arial, sans-serif;
-  font-size: 36px;
+  font-size: 30px;
   font-weight: bold;
   color: #e8eaf0;
 }
 
-h2 {
-  font-size: 32px;
-  margin-top: 0;
+
+.real_time
+{
+  
+  margin-bottom: 3px;
+  padding: 10px;
+  border: solid 2px rgb(255, 250, 250);
+  color: rgb(15, 5, 75);
+  
 }
+
 
 p {
   font-size: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 img {
@@ -160,4 +199,57 @@ img {
   height: 50%;
 }
 
+.div p
+{
+  
+  color: rgb(9, 9, 9);
+  font-size: 15px;
+  text-align: left;
+  padding: 20px;
+  font-weight: bold;
+  background-color: rgba(241, 246, 248, 0.215);
+  border: solid 1px rgba(255, 255, 255, 0.455);
 
+}
+
+.temp{
+  height: 70px;
+  width: 17rem;
+  padding: 20px;
+}
+
+.temp_span {
+  font-weight: bold;
+  display: block;
+  padding: 8px;
+  font-size: 20px;
+}
+.div p .temp_span span{
+  color: #da3a1ee4;
+  font-size: 30px;
+}
+.set{
+  margin: 0;
+  padding: 0;
+}
+.rise{
+  margin: 10px 0 0 0;
+  padding: 0px;
+}
+h2 {
+  font-size: 40px;
+  margin: 0;
+}
+
+
+h4{
+  margin: 10px;
+}
+
+
+.real_time h2{
+  
+  font-size: 25px;
+  color: black;
+  
+}
