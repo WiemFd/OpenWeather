@@ -6,5 +6,5 @@
 
 ## Demo :
 <div align="center">
-<img src="https://github.com/WiemFd/OpenWeather/assets/128514665/ebbad600-e93e-49af-b728-7686b1bbada0" width="700" height="400">
+<img src="https://github.com/WiemFd/OpenWeather/assets/128514665/ebbad600-e93e-49af-b728-7686b1bbada0" width="700" height="300">
 </div>
